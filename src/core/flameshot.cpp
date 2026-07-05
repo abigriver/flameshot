@@ -60,6 +60,10 @@ constexpr const char* visibleInDockProperty = "_visibleInDock";
 #include "widgets/uploadhistory.h"
 #endif
 
+#ifdef ENABLE_OCR
+#include "tools/ocr/ocrwidget.h"
+#endif
+
 #include <QApplication>
 #include <QBuffer>
 #include <QDebug>
@@ -517,7 +521,15 @@ void Flameshot::exportCapture(const QPixmap& capture,
     }
 #endif
 
-    if (!(tasks & CR::UPLOAD)) {
+#ifdef ENABLE_OCR
+    if (tasks & CR::OCR) {
+        auto* ocrWidget = new OcrWidget(capture);
+        ocrWidget->show();
+        ocrWidget->activateWindow();
+    }
+#endif
+
+    if (!(tasks & CR::UPLOAD) && !(tasks & CR::OCR)) {
         emit captureTaken(capture);
     }
 }

@@ -20,6 +20,15 @@ target_sources(
         imgupload/imguploadermanager.cpp
 )
 endif()
+if (ENABLE_OCR)
+target_sources(
+  flameshot
+        PRIVATE ocr/ocrtool.h
+        ocr/ocrtool.cpp
+        ocr/ocrwidget.h
+        ocr/ocrwidget.cpp
+)
+endif()
 target_sources(
   flameshot
   PRIVATE launcher/applaunchertool.h

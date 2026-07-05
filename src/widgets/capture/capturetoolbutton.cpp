@@ -144,6 +144,9 @@ static std::map<CaptureTool::Type, int> buttonTypeOrder
 #ifdef ENABLE_IMGUR
       { CaptureTool::TYPE_IMAGEUPLOADER, 17 },
 #endif
+#ifdef ENABLE_OCR
+      { CaptureTool::TYPE_OCR, 24 },
+#endif
       { CaptureTool::TYPE_ACCEPT, 18 },
 #if !defined(Q_OS_MACOS)
       { CaptureTool::TYPE_OPEN_APP, 19 }, { CaptureTool::TYPE_EXIT, 20 },
@@ -180,5 +183,9 @@ QList<CaptureTool::Type> CaptureToolButton::iterableButtonTypes = {
     CaptureTool::TYPE_OPEN_APP,
 #endif
     CaptureTool::TYPE_PIN,           CaptureTool::TYPE_SIZEINCREASE,
-    CaptureTool::TYPE_SIZEDECREASE,  CaptureTool::TYPE_ACCEPT,
+    CaptureTool::TYPE_SIZEDECREASE,
+#ifdef ENABLE_OCR
+    CaptureTool::TYPE_OCR,
+#endif
+    CaptureTool::TYPE_ACCEPT,
 };

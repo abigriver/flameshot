@@ -51,6 +51,9 @@ public:
         TYPE_INVERT = 22,
         TYPE_ACCEPT = 23,
         TYPE_CANCEL = 24,
+#ifdef ENABLE_OCR
+        TYPE_OCR = 25,
+#endif
     };
     Q_ENUM(Type);
 

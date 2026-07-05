@@ -132,6 +132,10 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     // drawFontSize, remember to update ConfigHandler::toolSize
     OPTION("copyOnDoubleClick"           ,Bool               ( false         )),
     OPTION("uploadClientSecret"          ,String             ( "313baf0c7b4d3ff" )),
+#ifdef ENABLE_OCR
+    OPTION("ocrEndpoint"                 ,String             ( "http://localhost:11434/api/chat" )),
+    OPTION("ocrModel"                    ,String             ( "qwen2.5vl:7b"                    )),
+#endif
     OPTION("showSelectionGeometry"       , BoundedInt        ( 0, 5, 4       )),
     OPTION("showSelectionGeometryHideTime", LowerBoundedInt  ( 0, 3000       )),
     OPTION("jpegQuality"                 , BoundedInt        ( 0,100,75      )),
@@ -171,6 +175,9 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
     SHORTCUT("TYPE_CANCEL"              ,   "Ctrl+Backspace"        ),
 #ifdef ENABLE_IMGUR
     SHORTCUT("TYPE_IMAGEUPLOADER"       ,                           ),
+#endif
+#ifdef ENABLE_OCR
+    SHORTCUT("TYPE_OCR"                 ,                           ),
 #endif
 #if !defined(Q_OS_MACOS)
     SHORTCUT("TYPE_OPEN_APP"            ,   "Ctrl+O"                ),

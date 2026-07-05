@@ -103,6 +103,10 @@ private:
     void initUseJpgForClipboard();
     void initUploadHistoryMax();
     void initUploadClientSecret();
+#ifdef ENABLE_OCR
+    void initOcrEndpoint();
+    void initOcrModel();
+#endif
     void initSaveLastRegion();
     void initShowSelectionGeometry();
     void initJpegQuality();
@@ -148,6 +152,10 @@ private:
     QCheckBox* m_saveAfterCopy;
     QLineEdit* m_savePath;
     QLineEdit* m_uploadClientKey;
+#ifdef ENABLE_OCR
+    QLineEdit* m_ocrEndpoint;
+    QLineEdit* m_ocrModel;
+#endif
     QPushButton* m_changeSaveButton;
     QCheckBox* m_screenshotPathFixedCheck;
     QCheckBox* m_historyConfirmationToDelete;

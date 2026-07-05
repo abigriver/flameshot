@@ -70,6 +70,10 @@ GeneralConf::GeneralConf(QWidget* parent)
     initUploadHistoryMax();
     initUploadClientSecret();
 #endif
+#ifdef ENABLE_OCR
+    initOcrEndpoint();
+    initOcrModel();
+#endif
     initPredefinedColorPaletteLarge();
     initShowSelectionGeometry();
 
@@ -104,6 +108,10 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
       config.historyConfirmationToDelete());
 
     m_uploadHistoryMax->setValue(config.uploadHistoryMax());
+#endif
+#ifdef ENABLE_OCR
+    m_ocrEndpoint->setText(config.ocrEndpoint());
+    m_ocrModel->setText(config.ocrModel());
 #endif
 #if !defined(DISABLE_UPDATE_CHECKER)
     m_checkForUpdates->setChecked(config.checkForUpdates());
@@ -631,6 +639,48 @@ void GeneralConf::uploadHistoryMaxChanged(int max)
 {
     ConfigHandler().setUploadHistoryMax(max);
 }
+
+#ifdef ENABLE_OCR
+void GeneralConf::initOcrEndpoint()
+{
+    auto* box = new QGroupBox(tr("OCR - Ollama API Endpoint"));
+    box->setFlat(true);
+    m_layout->addWidget(box);
+
+    auto* vboxLayout = new QVBoxLayout();
+    box->setLayout(vboxLayout);
+
+    m_ocrEndpoint = new QLineEdit(this);
+    QString foreground = this->palette().windowText().color().name();
+    m_ocrEndpoint->setStyleSheet(
+        QStringLiteral("color: %1").arg(foreground));
+    m_ocrEndpoint->setText(ConfigHandler().ocrEndpoint());
+    connect(m_ocrEndpoint, &QLineEdit::editingFinished, [this]() {
+        ConfigHandler().setOcrEndpoint(m_ocrEndpoint->text());
+    });
+    vboxLayout->addWidget(m_ocrEndpoint);
+}
+
+void GeneralConf::initOcrModel()
+{
+    auto* box = new QGroupBox(tr("OCR - Model Name"));
+    box->setFlat(true);
+    m_layout->addWidget(box);
+
+    auto* vboxLayout = new QVBoxLayout();
+    box->setLayout(vboxLayout);
+
+    m_ocrModel = new QLineEdit(this);
+    QString foreground = this->palette().windowText().color().name();
+    m_ocrModel->setStyleSheet(
+        QStringLiteral("color: %1").arg(foreground));
+    m_ocrModel->setText(ConfigHandler().ocrModel());
+    connect(m_ocrModel, &QLineEdit::editingFinished, [this]() {
+        ConfigHandler().setOcrModel(m_ocrModel->text());
+    });
+    vboxLayout->addWidget(m_ocrModel);
+}
+#endif
 
 void GeneralConf::initUndoLimit()
 {

@@ -11,6 +11,9 @@
 #ifdef ENABLE_IMGUR
 #include "tools/imgupload/imguploadertool.h"
 #endif
+#ifdef ENABLE_OCR
+#include "tools/ocr/ocrtool.h"
+#endif
 #include "tools/invert/inverttool.h"
 #include "tools/launcher/applaunchertool.h"
 #include "tools/line/linetool.h"
@@ -66,6 +69,9 @@ CaptureTool* ToolFactory::CreateTool(CaptureTool::Type t, QObject* parent)
         if_TYPE_return_TOOL(TYPE_SIZEDECREASE, SizeDecreaseTool);
         if_TYPE_return_TOOL(TYPE_INVERT, InvertTool);
         if_TYPE_return_TOOL(TYPE_ACCEPT, AcceptTool);
+#ifdef ENABLE_OCR
+        if_TYPE_return_TOOL(TYPE_OCR, OcrTool);
+#endif
         default:
             return nullptr;
     }

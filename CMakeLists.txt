@@ -90,6 +90,12 @@ if(ENABLE_IMGUR)
   add_compile_definitions(ENABLE_IMGUR)
 endif()
 
+option(ENABLE_OCR "Enable OCR text extraction via Ollama" OFF)
+
+if(ENABLE_OCR)
+  add_compile_definitions(ENABLE_OCR)
+endif()
+
 if(DISABLE_UPDATE_CHECKER)
   add_compile_definitions(DISABLE_UPDATE_CHECKER)
 endif()

@@ -135,6 +135,10 @@ public:
     CONFIG_GETTER_SETTER(squareMagnifier, setSquareMagnifier, bool)
     CONFIG_GETTER_SETTER(copyOnDoubleClick, setCopyOnDoubleClick, bool)
     CONFIG_GETTER_SETTER(uploadClientSecret, setUploadClientSecret, QString)
+#ifdef ENABLE_OCR
+    CONFIG_GETTER_SETTER(ocrEndpoint, setOcrEndpoint, QString)
+    CONFIG_GETTER_SETTER(ocrModel, setOcrModel, QString)
+#endif
     CONFIG_GETTER_SETTER(saveLastRegion, setSaveLastRegion, bool)
     CONFIG_GETTER_SETTER(showSelectionGeometry, setShowSelectionGeometry, int)
     CONFIG_GETTER_SETTER(jpegQuality, setJpegQuality, int)
